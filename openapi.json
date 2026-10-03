@@ -1,0 +1,167 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Rust Users API",
+    "version": "1.0.0",
+    "description": "Simple PostgreSQL CRUD backend"
+  },
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "List users",
+        "responses": {
+          "200": {
+            "description": "Users returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create a user",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UserInput"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/UserResponse"
+          },
+          "400": {
+            "description": "Invalid user data"
+          },
+          "409": {
+            "description": "Email already exists"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      ],
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get a user",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/UserResponse"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Users"],
+        "summary": "Update a user",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UserInput"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/UserResponse"
+          },
+          "400": {
+            "description": "Invalid user data"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "409": {
+            "description": "Email already exists"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Delete a user",
+        "responses": {
+          "204": {
+            "description": "User deleted"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "required": ["id", "name", "email"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "example": "Hirak Roy"
+          },
+          "email": {
+            "type": "string",
+            "example": "hirak@example.com"
+          }
+        }
+      },
+      "UserInput": {
+        "type": "object",
+        "required": ["name", "email"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Hirak Roy"
+          },
+          "email": {
+            "type": "string",
+            "example": "hirak@example.com"
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "UserInput": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserInput"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "UserResponse": {
+        "description": "User returned",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+services:
+  api:
+    build: .
+    image: rust-backend:local
+    restart: unless-stopped
+
+    env_file:
+      - .env
+
+    environment:
+      PORT: "3002"
+
+    ports:
+      - "127.0.0.1:3002:3002"
+
+    init: true

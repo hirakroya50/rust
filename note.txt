@@ -3,3 +3,12 @@ docker buildx build \
   --platform linux/amd64 \
   -t hirakroya50/rust-backend:v3 \
   --push .
+  
+  # to run 
+  docker run -d \
+  --platform linux/amd64 \
+  --name rust-backend-amd64 \
+  --env-file /Users/hirak/MEGA/personal/rust/.env \
+  -p 127.0.0.1:3003:3002 \
+  -e PORT=3002 \
+  hirakroya50/rust-backend:v3

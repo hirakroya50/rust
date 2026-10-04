@@ -5,6 +5,7 @@ WORKDIR /app
 COPY Cargo.toml Cargo.lock ./
 COPY src ./src
 
+RUN rustc --version
 RUN cargo build --release --locked
 
 

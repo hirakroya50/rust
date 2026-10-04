@@ -14,3 +14,7 @@ docker buildx build \
   hirakroya50/rust-backend:v3
 
 docker hub : hirakroya50/rust-backend:v1
+
+
+deployed in render - profile : hirakroya50
+https://rust-backend-v3.onrender.com/

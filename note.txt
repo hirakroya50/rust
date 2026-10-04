@@ -12,3 +12,5 @@ docker buildx build \
   -p 127.0.0.1:3003:3002 \
   -e PORT=3002 \
   hirakroya50/rust-backend:v3
+
+docker hub : hirakroya50/rust-backend:v1

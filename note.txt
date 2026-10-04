@@ -1,0 +1,5 @@
+ # this command will build for the AMD procer ,--> image size 13mb 
+docker buildx build \
+  --platform linux/amd64 \
+  -t hirakroya50/rust-backend:v3 \
+  --push .
